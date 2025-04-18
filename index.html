@@ -1,90 +1,148 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Websim Login</title>
+  <meta charset="UTF-8">
+  <title>Sign in - websim</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
+      font-family: 'Google Sans', Roboto, Arial, sans-serif;
+      background-color: #f2f5f9;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
     }
-    .login-box {
+    .container {
       background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
+      border-radius: 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 400px;
+      padding: 40px;
     }
-    .login-box img {
-      width: 50px;
+    .logo {
+      height: 40px;
+      margin-bottom: 20px;
     }
-    .login-box h2 {
-      margin: 20px 0;
+    h1 {
+      font-weight: 400;
       font-size: 24px;
+      margin-bottom: 5px;
     }
-    .login-box input[type="email"],
-    .login-box input[type="password"] {
+    .subtitle {
+      font-size: 14px;
+      color: #5f6368;
+      margin-bottom: 20px;
+    }
+    .input-box {
+      margin-bottom: 20px;
+    }
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
+      padding: 14px;
+      border: 1px solid #dadce0;
       border-radius: 4px;
+      font-size: 16px;
+      outline: none;
     }
-    .login-box label {
+    label {
+      display: block;
+      font-size: 14px;
+      color: #1a73e8;
+      margin-bottom: 4px;
+    }
+    .checkbox-container {
       display: flex;
       align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
     }
-    .login-box input[type="checkbox"] {
+    .checkbox-container input {
       margin-right: 8px;
     }
-    .login-box button {
-      width: 100%;
-      padding: 10px;
-      background: #1a73e8;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
+    .info-text {
+      font-size: 12px;
+      color: #5f6368;
+      margin-bottom: 20px;
     }
-    .login-box a {
+    .info-text a {
       color: #1a73e8;
       text-decoration: none;
-      display: inline-block;
-      margin-top: 10px;
+    }
+    .button {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+    }
+    .alt-option {
+      font-size: 14px;
+      color: #1a73e8;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 20px;
     }
     .footer {
-      text-align: center;
-      margin-top: 20px;
       font-size: 12px;
-      color: #666;
+      text-align: center;
+      margin-top: 60px;
+      color: #5f6368;
+    }
+    .footer a {
+      margin: 0 8px;
+      color: #5f6368;
+      text-decoration: none;
+    }
+    .google-label {
+      color: #5f6368;
+      font-size: 14px;
+      margin-bottom: 12px;
     }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <img src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="Google Logo">
-    <h2>Sign in to continue to <strong>websim</strong></h2>
+  <div class="container">
+    <div class="google-label">Sign in with Google</div>
+    <img src="https://dummyimage.com/60x60/000/fff&text=websim" alt="websim logo" class="logo">
+    <h1>Sign in</h1>
+    <div class="subtitle">to continue to <a href="#">websim</a></div>
+
     <form>
-      <input type="email" placeholder="Email or phone" required>
-      <input type="password" placeholder="Enter your password" required>
-      <label><input type="checkbox"> Show password</label>
-      <button type="submit">Next</button>
+      <div class="input-box">
+        <label for="email">Email or phone</label>
+        <input type="text" id="email" name="email" required>
+      </div>
+
+      <div class="input-box">
+        <label for="password">Enter your password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="show-password">
+        <label for="show-password">Show password</label>
+      </div>
+
+      <div class="info-text">
+        Before using this app, you can review websim’s 
+        <a href="#">privacy policy</a> and 
+        <a href="#">terms of service</a>.
+      </div>
+
+      <a class="alt-option" href="#">Try another way</a>
+
+      <button type="submit" class="button">Next</button>
     </form>
-    <a href="#">Try another way</a>
-    <p class="footer">
-      Before using this app, you can review websim’s <a href="#">privacy policy</a> and
-      <a href="#">terms of service</a>.
-    </p>
+
     <div class="footer">
-      English (United States) | <a href="#">Help</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
+      English (United States) |
+      <a href="#">Help</a> |
+      <a href="#">Privacy</a> |
+      <a href="#">Terms</a>
     </div>
   </div>
 </body>
