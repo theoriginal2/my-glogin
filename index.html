@@ -1,72 +1,125 @@
+Image to Code
+Toggle Sidebar
+
+New
+
+Home
+Include screenshot of current version?
+
+
+Preview
+Reference
+Original Screenshot
+html
+Run
+Copy code
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Google Login
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet"/>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Google Sign In</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    rel="stylesheet"
+  />
   <style>
-   body {
+    body {
       font-family: 'Roboto', sans-serif;
     }
   </style>
- </head>
- <body class="bg-[#e8f0fe] min-h-screen flex flex-col justify-between">
-  <main class="flex justify-center items-center flex-grow p-6">
-   <section class="bg-white rounded-2xl max-w-4xl w-full flex flex-col md:flex-row p-8 md:p-12 gap-8 md:gap-16">
-    <div class="flex flex-col gap-6 md:w-1/2">
-     <img alt="Google logo with G in blue, red, yellow and green colors" class="w-10 h-10" decoding="async" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b444984b-6371-4a52-6e19-3db0e5a9b466.jpg" width="40"/>
-     <h1 class="text-3xl font-normal text-black">
-      Welcome
-     </h1>
-     <button class="flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 max-w-max text-sm text-gray-900" type="button">
-      <i class="fas fa-user-circle text-gray-600">
-      </i>
-      adoyijustina1@gmail.com
-      <i class="fas fa-chevron-down text-gray-600">
-      </i>
-     </button>
-    </div>
-    <form autocomplete="off" class="flex flex-col md:w-1/2 gap-4" onsubmit="event.preventDefault()">
-     <input aria-label="Enter your password" class="border border-gray-400 rounded-md px-4 py-3 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Enter your password" required="" type="password"/>
-     <label class="flex items-center gap-2 text-sm text-gray-900 font-semibold select-none">
-      <input class="w-4 h-4" type="checkbox"/>
-      Show password
-     </label>
-     <div class="flex justify-end items-center gap-6 mt-4">
-      <button class="text-blue-600 text-sm font-normal hover:underline" type="button">
-       Forgot password?
-      </button>
-      <button class="bg-blue-600 text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600" type="submit">
-       Next
-      </button>
-     </div>
+</head>
+<body class="bg-white text-gray-900 min-h-screen flex flex-col justify-between">
+  <div class="px-6 pt-10 max-w-md mx-auto w-full">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+      alt="Google logo with blue, red, yellow and green colors"
+      class="w-14 h-14 mb-8"
+    />
+    <h1 class="text-4xl font-normal mb-2 leading-tight">Sign in</h1>
+    <p class="text-base font-normal mb-6">Use your Google Account</p>
+
+    <form class="space-y-4" onsubmit="return false">
+      <input
+        type="text"
+        placeholder="Email or phone"
+        class="w-full border border-gray-300 rounded-md px-4 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        autocomplete="username"
+        aria-label="Email or phone"
+      />
+      <div>
+        <a href="#" class="text-blue-700 text-sm font-normal">Forgot email?</a>
+      </div>
+
+      <input
+        type="password"
+        placeholder="Email or phone"
+        class="w-full border border-gray-300 rounded-md px-4 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        autocomplete="current-password"
+        aria-label="Email or phone"
+      />
+      <div class="flex items-center justify-between">
+        <a href="#" class="text-blue-700 text-sm font-normal">Forgot password?</a>
+        <label class="flex items-center space-x-1 text-gray-800 text-sm select-none">
+          <input type="checkbox" class="w-4 h-4" />
+          <span>Show password</span>
+        </label>
+      </div>
+
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          class="bg-blue-700 text-white text-base font-medium rounded-full px-6 py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        >
+          Next
+        </button>
+      </div>
     </form>
-   </section>
-  </main>
-  <footer class="flex justify-between items-center px-8 py-4 text-xs text-gray-900 select-none">
-   <div class="flex items-center gap-1 cursor-pointer">
-    <span>
-     English (United States)
-    </span>
-    <i class="fas fa-chevron-down text-[10px]">
-    </i>
-   </div>
-   <nav class="flex gap-6">
-    <a class="hover:underline" href="#">
-     Help
-    </a>
-    <a class="hover:underline" href="#">
-     Privacy
-    </a>
-    <a class="hover:underline" href="#">
-     Terms
-    </a>
-   </nav>
+
+    <p class="text-gray-600 text-sm mt-10 leading-relaxed">
+      Not your computer? Use a private browsing window to sign in.
+      <a href="#" class="text-blue-700 font-semibold">Learn more about using Guest mode</a>
+    </p>
+
+    <div class="mt-12">
+      <label for="language" class="text-gray-900 text-sm font-normal">English (United Kingdom)</label>
+      <select
+        id="language"
+        name="language"
+        class="ml-2 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+        aria-label="Select language"
+      >
+        <option>English (United Kingdom)</option>
+        <option>English (United States)</option>
+        <option>Español</option>
+        <option>Français</option>
+      </select>
+    </div>
+  </div>
+
+  <footer class="w-full border-t border-gray-300 py-4 mt-16">
+    <div class="max-w-md mx-auto flex justify-between px-6 text-gray-700 text-sm font-normal">
+      <a href="#" class="hover:underline">Help</a>
+      <a href="#" class="hover:underline">Privacy</a>
+      <a href="#" class="hover:underline">Terms</a>
+    </div>
   </footer>
- </body>
+</body>
 </html>
+
+
+
+
+Versions
+Create
+v1
+Toggle
+
+
+Upload
+
+Camera
